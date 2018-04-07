@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">youtubeVideo</string>
 
-    <string name="vidya_vox1">Vidya Vox 1</string>
+    <string name="title_street_fighter">Street Fighter</string>
 
-    <string name="vidya_vox2">Vidya Vox 2</string>
+    <string name="title_etc">etc</string>
 </resources>

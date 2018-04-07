@@ -9,55 +9,52 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.skytreasure.kotinyoutube.constants.DataConstants
 import kr.kyungjoon.hansol.youtubevideo.R
 import kr.kyungjoon.hansol.youtubevideo.ui.adapter.YoutubeListAdapter
+import kr.kyungjoon.hansol.youtubevideo.ui.constants.DataConstants
 
-/**
- * Created by akash on 15/6/17.
- */
 class RecyclerViewFragment : Fragment() {
 
-    private var mPage : Int =0
-
+    private var mPage: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.run {
             mPage = getInt(ARG_PAGE)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        inflater?.let {
-            val view =  inflater.inflate(R.layout.item_recycler_view, container, false)
-            val recyclerView = view as RecyclerView
-            recyclerView.run {
-                layoutManager = LinearLayoutManager(context)
-                hasFixedSize()
 
-                activity?.let {
-                    adapter = YoutubeListAdapter(it, DataConstants.youtubeVideoList,context)
-                }
+        val recyclerView = inflater.inflate(R.layout.item_recycler_view, container, false) as RecyclerView
+        recyclerView.run {
+            layoutManager = LinearLayoutManager(context)
+            hasFixedSize()
+
+            activity?.let {
+                adapter = YoutubeListAdapter(it, DataConstants.youtubeVideoList, context)
             }
         }
-        return view
+        return recyclerView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
 
+    companion object {
+        val ARG_PAGE = "ARG_PAGE"
 
-    companion object{
-        val ARG_PAGE ="ARG_PAGE"
+        fun newInstance(page: Int): RecyclerViewFragment {
 
-        fun newInstance(page : Int ) : RecyclerViewFragment{
             val args = Bundle()
-            args.putInt(ARG_PAGE,page)
+            args.apply {
+                putInt(ARG_PAGE, page)
+            }
             val fragment = RecyclerViewFragment()
-            fragment.arguments = args
+            fragment.apply {
+                arguments = args
+            }
             return fragment
         }
     }

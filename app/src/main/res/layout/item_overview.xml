@@ -16,8 +16,6 @@
                 android:scaleType="centerCrop"
                 android:layout_height="wrap_content" />
 
-
-
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_play"
                 android:layout_width="54dp"
@@ -33,8 +31,6 @@
                 android:visibility="visible" />
 
         </FrameLayout>
-
-
 
         <TextView
             android:id="@+id/tv_title"

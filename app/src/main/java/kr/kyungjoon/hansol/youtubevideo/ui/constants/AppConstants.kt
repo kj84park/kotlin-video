@@ -1,11 +1,8 @@
-package com.skytreasure.kotinyoutube.constants
+package kr.kyungjoon.hansol.youtubevideo.ui.constants
 
-/**
- * Created by akash on 16/6/17.
- */
-class AppConstants{
+class AppConstants {
 
-    companion object{
-        val GOOGLE_DEVELOPER_KEY = "<Put your API Key here>"
+    companion object {
+        val GOOGLE_DEVELOPER_KEY = "AIzaSyBxxu5RxI4cwpser-4c25eSNkmzR5dGS8Q"
     }
 }

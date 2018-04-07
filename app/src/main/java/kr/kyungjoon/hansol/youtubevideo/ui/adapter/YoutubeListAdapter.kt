@@ -12,62 +12,55 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.youtube.player.YouTubeIntents
 import com.google.android.youtube.player.YouTubeStandalonePlayer
-import com.skytreasure.kotinyoutube.constants.AppConstants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_overview.view.*
 import kr.kyungjoon.hansol.youtubevideo.R
+import kr.kyungjoon.hansol.youtubevideo.ui.constants.AppConstants
 import kr.kyungjoon.hansol.youtubevideo.ui.model.YoutubeModel
 
-/**
- * Created by akash on 15/6/17.
- */
-class YoutubeListAdapter(var activity: Activity, var overviewList: List<YoutubeModel>, var mContext : Context) : RecyclerView.Adapter<YoutubeListAdapter.ViewHolder>() {
-
+class YoutubeListAdapter(var activity: Activity, var overviewList: List<YoutubeModel>, var mContext: Context) : RecyclerView.Adapter<YoutubeListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.item_overview,parent,false)
-        //val mBinding: ItemOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.item_overview, parent, false)
-        return  ViewHolder(view)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.item_overview, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindOverviewVideos(overviewList[position],activity)
+        holder.bindOverviewVideos(overviewList[position], activity)
     }
 
     override fun getItemCount(): Int {
         return overviewList.size
     }
 
-    open class ViewHolder(val view : View ) : RecyclerView.ViewHolder(view) {
-        fun bindOverviewVideos(overview: YoutubeModel, activity: Activity){
-            with(overview){
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bindOverviewVideos(overview: YoutubeModel, activity: Activity) {
+
+            with(overview) {
                 Picasso.with(view.context).load(overview.imageUrl).into(view.iv_main)
-                YoutubeListAdapter.setNineBySixteenHeight(view.context,view.iv_main)
-                view.tv_title.text=overview.title
+                YoutubeListAdapter.setNineBySixteenHeight(view.context, view.iv_main)
+                view.tv_title.text = overview.title
                 view.setOnClickListener { view ->
 
-                    if(YouTubeIntents.canResolvePlayVideoIntent(view.context)){
-                        /*val intent: Intent = YouTubeIntents.createPlayVideoIntentWithOptions(view.context, overview.videoId, true, false)
-                        startActivity(view.context,intent,null)*/
+                    if (YouTubeIntents.canResolvePlayVideoIntent(view.context)) {
+                        val intent: Intent = YouTubeStandalonePlayer.createVideoIntent(
+                                activity, AppConstants.GOOGLE_DEVELOPER_KEY, overview.videoId, 0, true, true)
 
-                       val  intent :Intent  = YouTubeStandalonePlayer.createVideoIntent(
-                               activity, AppConstants.GOOGLE_DEVELOPER_KEY, overview.videoId, 0, true, true)
+                        startActivity(view.context, intent, null)
 
-                        startActivity(view.context,intent,null)
-
-                    }else{
-                        Toast.makeText(view.context,"Youtube App is not present in the device",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(view.context, "Youtube App is not present in the device", Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }
     }
 
-    companion object{
+    companion object {
         fun setNineBySixteenHeight(context: Context, view: View) {
-            val display = (context as AppCompatActivity).getWindowManager().getDefaultDisplay()
-            val width = display.getWidth()
+            val display = (context as AppCompatActivity).windowManager.defaultDisplay
+            val width = display.width
             val height = width * 9 / 16
             view.layoutParams.height = height
         }
