@@ -9,7 +9,7 @@ import kr.kyungjoon.hansol.youtubevideo.ui.component.RecyclerViewFragment
 
 class SwipeAdapter(fm: FragmentManager, private val context: Context) : FragmentStatePagerAdapter(fm) {
 
-    private val tabTitles = arrayOf(context.getString(R.string.title_street_fighter), context.getString(R.string.title_etc))
+    private val tabTitles = arrayOf(context.getString(R.string.title_01), context.getString(R.string.title_02))
 
     override fun getItem(position: Int): Fragment {
         return RecyclerViewFragment.newInstance(position + 1)

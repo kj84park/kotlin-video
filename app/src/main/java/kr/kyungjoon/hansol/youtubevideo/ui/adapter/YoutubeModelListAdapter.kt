@@ -60,5 +60,4 @@ class YoutubeModelListAdapter(var activity: Activity, var overviewList: List<You
             view.layoutParams.height = height
         }
     }
-
 }

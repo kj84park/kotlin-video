@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">youtubeVideo</string>
 
-    <string name="title_street_fighter">Street Fighter</string>
+    <string name="title_01">Street Fighter Ost</string>
 
-    <string name="title_etc">etc</string>
+    <string name="title_02">Piano Jazz</string>
 </resources>

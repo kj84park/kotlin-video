@@ -12,7 +12,7 @@ class DataConstants {
         )
 
         val youtubeVideoList_02: List<YoutubeModel> = listOf(
-                getOverviewModel("https://youtu.be/T1QM0CF7YpU", "(NewAge Piano),2 HOURS The Best Relaxing Music"),
+                getOverviewModel("https://youtu.be/pokI5NgUWjI", "Coffee Bossa Nova & JAZZ - Relaxing Instrumental Music For for Studying, Sleep, Work"),
                 getOverviewModel("https://youtu.be/FAJbEQJpIKA", "Jazz Piano Music 10 Hours"),
                 getOverviewModel("https://youtu.be/XcuYoZug5iM", "Relaxing Coffee JAZZ - Cafe Saxophone & Piano Jazz Music for Work,Studying, Relaxing"),
                 getOverviewModel("https://youtu.be/sMU6qEetzeo", "New Age Piano Music: Carlo Balzaretti | Classical Music")

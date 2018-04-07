@@ -11,7 +11,7 @@ import kr.kyungjoon.hansol.youtubevideo.R
 import kr.kyungjoon.hansol.youtubevideo.ui.adapter.YoutubeModelListAdapter
 import kr.kyungjoon.hansol.youtubevideo.ui.constants.DataConstants
 
-class RecyclerViewFragment() : Fragment() {
+class RecyclerViewFragment : Fragment() {
 
     private var mPage: Int = 0
 
