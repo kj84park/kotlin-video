@@ -2,7 +2,6 @@ package kr.kyungjoon.hansol.youtubevideo.ui.adapter
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
@@ -18,7 +17,7 @@ import kr.kyungjoon.hansol.youtubevideo.R
 import kr.kyungjoon.hansol.youtubevideo.ui.constants.AppConstants
 import kr.kyungjoon.hansol.youtubevideo.ui.model.YoutubeModel
 
-class YoutubeListAdapter(var activity: Activity, var overviewList: List<YoutubeModel>, var mContext: Context) : RecyclerView.Adapter<YoutubeListAdapter.ViewHolder>() {
+class YoutubeModelListAdapter(var activity: Activity, var overviewList: List<YoutubeModel>, var mContext: Context) : RecyclerView.Adapter<YoutubeModelListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.item_overview, parent, false)
@@ -36,19 +35,15 @@ class YoutubeListAdapter(var activity: Activity, var overviewList: List<YoutubeM
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindOverviewVideos(overview: YoutubeModel, activity: Activity) {
-
             with(overview) {
                 Picasso.with(view.context).load(overview.imageUrl).into(view.iv_main)
-                YoutubeListAdapter.setNineBySixteenHeight(view.context, view.iv_main)
+                YoutubeModelListAdapter.setNineBySixteenHeight(view.context, view.iv_main)
                 view.tv_title.text = overview.title
                 view.setOnClickListener { view ->
-
                     if (YouTubeIntents.canResolvePlayVideoIntent(view.context)) {
-                        val intent: Intent = YouTubeStandalonePlayer.createVideoIntent(
-                                activity, AppConstants.GOOGLE_DEVELOPER_KEY, overview.videoId, 0, true, true)
-
-                        startActivity(view.context, intent, null)
-
+                        YouTubeStandalonePlayer.createVideoIntent(activity, AppConstants.GOOGLE_DEVELOPER_KEY, overview.videoId, 0, true, true).let {
+                            startActivity(view.context, it, null)
+                        }
                     } else {
                         Toast.makeText(view.context, "Youtube App is not present in the device", Toast.LENGTH_SHORT).show()
                     }

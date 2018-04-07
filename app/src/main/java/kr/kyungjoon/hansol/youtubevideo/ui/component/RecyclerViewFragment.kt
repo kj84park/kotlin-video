@@ -1,6 +1,5 @@
 package kr.kyungjoon.hansol.youtubevideo.ui.component
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,12 +7,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kr.kyungjoon.hansol.youtubevideo.R
-import kr.kyungjoon.hansol.youtubevideo.ui.adapter.YoutubeListAdapter
+import kr.kyungjoon.hansol.youtubevideo.ui.adapter.YoutubeModelListAdapter
 import kr.kyungjoon.hansol.youtubevideo.ui.constants.DataConstants
 
-class RecyclerViewFragment : Fragment() {
+class RecyclerViewFragment() : Fragment() {
 
     private var mPage: Int = 0
 
@@ -32,14 +30,14 @@ class RecyclerViewFragment : Fragment() {
             hasFixedSize()
 
             activity?.let {
-                adapter = YoutubeListAdapter(it, DataConstants.youtubeVideoList, context)
+                adapter = if(mPage == 1){
+                    YoutubeModelListAdapter(it, DataConstants.youtubeVideoList_01, context)
+                } else {
+                    YoutubeModelListAdapter(it, DataConstants.youtubeVideoList_02, context)
+                }
             }
         }
         return recyclerView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     companion object {
@@ -51,13 +49,13 @@ class RecyclerViewFragment : Fragment() {
             args.apply {
                 putInt(ARG_PAGE, page)
             }
+
             val fragment = RecyclerViewFragment()
             fragment.apply {
                 arguments = args
             }
+
             return fragment
         }
     }
-
-    private fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
